@@ -1,0 +1,61 @@
+{% load static %}
+
+
+<style>
+    .container {
+      padding: 0;
+      margin: 0, auto;
+      border-radius: 1rem;
+
+  }
+    .container a {
+      width: 45%;
+      max-width: 250px;
+      border-radius: 1rem;
+
+  }
+
+    .container div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 1rem;
+      border: solid black 1px;
+
+  }
+    .container img {
+      width: 100%;
+      border-radius: 1rem;
+
+  }
+
+
+</style>
+
+  {% if article_list %}
+    <div class="container">
+      {% for article in article_list %}
+      <a href="{% url 'articleapp:detail' pk=article.pk %}">
+      {% include 'snippets/card.html' with article=article %}
+      <!-- card.html 에 있는 article (전자)에 list.html 에 있는 article (후자)을 대입-->
+      </a>
+      {% endfor %}
+    </div>
+  <script src="{% static 'js/magicgrid.js' %}"></script>
+
+  {% else %}
+    <div class="text-center">
+      <h1>You Can Start SPORTERS !</h1>
+    </div>
+  {% endif %}
+
+  {% include 'snippets/pagination.html' with page_obj=page_obj %}
+
+    <div class="text-center" >
+      <a href="{% url 'articleapp:create' %}" class="btn btn-dark rounded-pill col-2.5 mt-3 mb-3">
+        Create Article
+      </a>
+    </div>
+
+
+
